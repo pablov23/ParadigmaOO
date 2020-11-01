@@ -6,21 +6,28 @@ class Personaje{
 	var property altura
 	
 	method mismoApellido(otroApellido)= otroApellido == apellido
+	
 	method apellido()= apellido
+	
 	method esMayor() = edad>50
+	
 	method cambioEdad(anio){
 		edad+=anio
-	}
+		}
+	
 	method elementoPropio() = tiene.any{elemento=>elemento.esDe(self)}
 	
 	method agregarElemento(elemento) = tiene.add(elemento)
+	
 	method sacarElemento(elemento) = tiene.remove(elemento)
 	
 	method nombreOloroso(){nombre="Apestoso" + nombre}
 	
 	method elementoMasViejo()= if(tiene.size()>0){
 		tiene.min{elemento=>elemento.fecha()}
-		}else{
+		}
+		else
+		{
 			throw "Error"
 		}
 		
@@ -49,12 +56,12 @@ class ElementoEspecial inherits Elemento{
 class Documentacion inherits Elemento{
 	var aparece = []
 	
-    override method esDe(alguien) = aparece.contains(alguien)
+    	override method esDe(alguien) = aparece.contains(alguien)
     
-    override method problemaCon(personaje){
-    	super(personaje)
-    	if(aparece.contain(personaje)){
-    		aparece.remoce(personaje)
+    	override method problemaCon(personaje){
+    		super(personaje)
+    		if(aparece.contain(personaje)){
+    			aparece.remoce(personaje)
     	}
     }
 }
@@ -79,10 +86,13 @@ object DeLorean{
 	method subirPasajero(pasajero){
 		viajeros.add(pasajero)
 	}
+	
 	method bajarPasajero(pasajero){
 		if(viajeros.contains(pasajero)){
 			viajeros.remove(pasajero)
-	}else{
+	}
+	else
+	{
 		throw "No estaba el pasajero"
 	}
 	
@@ -122,7 +132,8 @@ object nafta inherits Combustible{
 		if (persona.esMayor()){
 			persona.cambioEdad(-5)
 		}
-		else{
+		else
+		{
 			persona.cambioEdad(+10)
 		}
 	}
