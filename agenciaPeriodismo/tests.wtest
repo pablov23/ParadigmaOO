@@ -1,0 +1,50 @@
+import examen.*
+
+test "Resultado Por Pais Nombrista" {
+	assert.equals(argentina.cifraPorEstrategias([nombrista,ingresosAltos,accesoUni]),[9,87758,80])
+
+}
+
+test "Resultado Paises Nombrista"{
+	assert.equals(mundo.mejorPais(nombrista),argentina)
+	
+}
+
+test "Resultado Paises por Acceso Universidad"{
+	
+	assert.equals(mundo.mejorPais(accesoUni),brasil)
+	
+}
+test "EdicionDiario"{
+	//En el diario hay 3 analistas distintos, clasic, rebeldin y nin, inicialmente cuentan con 0 artículos, al mandarlos a escribir terminan con 3.
+	const china = new Pais(pBI = 700, habitantes = 700000, porcentajeUniversidad = 20, decil=[4290,9807,13681,16199,19259,24101,29614,36642,46579,87758], nombre = "china")
+	const rebeldin = new Rebelde(estrategia=pBI,nombre="pepito",articulos=[])
+	const nik = new Salieris(plagiaA = rebeldin, nombre = "Nik Gaturro", articulos = [])
+	const laNacion = new Diario(pais=china,analistas=[rebeldin,nik])
+	assert.equals(laNacion.articulos().size(),0)
+	laNacion.mandarAEscribir()
+	assert.equals(laNacion.articulos().size(),2)
+	
+}
+
+test "Cambio de simpatizantes, cambia nombre y cifras"{
+	//Los nombres de los articulos se modifican junto con las cifras
+	const massa = new Panqueque(simpatizaCon=[brasil], estrategiaPosi=pBI, estrategiaNeg=accesoUni,nombre="Massa",articulos=[])
+	const a = massa.escribirArticuloDe(brasil).cifra()
+	const massa = new Panqueque(simpatizaCon=[argentina], estrategiaPosi=nombrista, estrategiaNeg=accesoUni,nombre="Massa",articulos=[])
+    const b = massa.escribirArticuloDe(brasil).cifra()
+    assert.that(a != b)
+}
+
+test "Juan Cipayo escribe"{
+	//Para Peru usa la estrategia positiva, accesoUni (20 *1.5 = 30) y para Argentina la nombrista (9 *1,5 = 13,5)
+	assert.equals(juanCipayo.escribirArticuloDe(peru).cifra(),30)
+	assert.equals(juanCipayo.escribirArticuloDe(argentina).cifra(),13.5)
+}
+/*Se utilizó polimorfismo junto con composición para las estrategias de análisis, como cada una realizaba el cálculo de la cifra
+ de una forma distinta, pero todas podían ser llamadas por un objeto análisis, debían conocer y devolver un valor al llamar al 
+ método calculo(), todas lo calculaban de una forma distinta, pero para todas era un método conocido*/
+ 
+ /*Se utilizó herencia para modelar a los analistas, como todos tenían atributos en común como el nombre, los articulos y algunos 
+   métodos, se hizo uso de este concepto para modelarlos y evitar escribir código repetido en cada uno, heredaban de la superclase 
+   estos atributos y métodos que eran comunes a todos */
